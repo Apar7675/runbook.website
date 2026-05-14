@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RunBook Website
 
-## Getting Started
+RunBook public marketing website.
 
-First, run the development server:
+## Local Dev
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd D:\runbook.website
+npm install
+npm run dev -- -p 3005
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3005` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Request Demo Form
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- POSTs to `/api/request-demo`
+- If `RESEND_API_KEY` is blank, the app runs in dev mode
+- Dev mode logs the submitted lead server-side and returns a local capture message
+- When Resend is configured, the API sends the lead email using:
+  - `RESEND_API_KEY`
+  - `RUNBOOK_LEADS_TO_EMAIL`
+  - `RUNBOOK_LEADS_FROM_EMAIL`
 
-## Learn More
+Local development values live in `.env.local`. Keep `RESEND_API_KEY` blank unless you are intentionally testing email delivery.
 
-To learn more about Next.js, take a look at the following resources:
+## Production Email Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Verify the sending domain in Resend before launch
+- Set these environment variables in Vercel:
+  - `RESEND_API_KEY`
+  - `RUNBOOK_LEADS_TO_EMAIL`
+  - `RUNBOOK_LEADS_FROM_EMAIL`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Recommended production values:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+RUNBOOK_LEADS_TO_EMAIL=ap@tenmfg.com
+RUNBOOK_LEADS_FROM_EMAIL=RunBook <demo@your-runbook-domain.com>
+```
