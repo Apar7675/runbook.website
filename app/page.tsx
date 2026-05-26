@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 const navItems = ["Product", "Workflow", "Inspection", "Time Control"];
 
 const workflow = [
@@ -135,10 +138,16 @@ export default function Home() {
 
       <header className="relative z-10 border-b border-[#263244]/70 bg-[#05070C]/86 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[90rem] items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-          <a href="#" className="flex items-center gap-3" aria-label="RunBook home">
-            <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#3F8CFF]/45 bg-[#111A2A] text-sm font-black text-[#62D6FF] shadow-[0_0_34px_rgba(63,140,255,0.28)]">RB</span>
-            <span className="text-lg font-semibold text-white">RunBook</span>
-          </a>
+          <Link href="/" className="brand-logo-link" aria-label="RunBook home">
+            <Image
+              src="/brand/runbook-logo.png"
+              alt="RunBook"
+              width={230}
+              height={42}
+              className="brand-logo"
+              priority
+            />
+          </Link>
           <nav className="hidden items-center gap-7 text-sm font-medium text-[#9CA8BA] lg:flex">
             {navItems.map((item) => (
               <a key={item} href={`#${item.toLowerCase().replaceAll(" ", "-")}`} className="transition hover:text-white">
@@ -155,13 +164,13 @@ export default function Home() {
         <div className="flex flex-col justify-center">
           <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-[#263244] bg-[#0B111C]/85 px-3 py-1.5 text-xs font-semibold uppercase text-[#62D6FF]">
             <StatusDot />
-            Manufacturing workflow control
+            Shop control without ERP complexity
           </div>
           <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-[4rem]">
-            The missing link between office planning and shop-floor execution.
+            Bring order to your shop without jumping into full ERP.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-[#B8C2D2]">
-            RunBook connects routing, work orders, travelers, ballooned inspection, employee time, and workstation execution into one controlled manufacturing workflow.
+            RunBook helps growing machine shops control routing, work orders, inspection, employee time, and shop-floor execution before they are ready for a full ERP system.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <a href="/request-demo" className="btn-primary">Request Demo <ArrowIcon /></a>
@@ -484,8 +493,8 @@ export default function Home() {
         <div className="cta-panel">
           <div>
             <p className="section-kicker">Request demo</p>
-            <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-5xl">See how RunBook can control your shop floor.</h2>
-            <p className="mt-5 max-w-3xl text-[#B8C2D2]">Built for CNC shops, Swiss machining, turning, milling, and inspection-heavy production.</p>
+            <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-5xl">Get your shop organized before ERP gets expensive.</h2>
+            <p className="mt-5 max-w-3xl text-[#B8C2D2]">Built for CNC shops, Swiss machining, turning, milling, and inspection-heavy production that need better control without a heavy ERP rollout.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href="/request-demo" className="btn-primary">Request Demo <ArrowIcon /></a>
               <a href="/request-demo" className="btn-secondary">Contact Us</a>
@@ -514,7 +523,15 @@ export default function Home() {
       <footer className="footer-shell relative z-10 border-t border-[#263244] bg-[#05070C]">
         <div className="mx-auto grid max-w-[90rem] gap-8 px-5 py-10 sm:px-6 md:grid-cols-[1.35fr_repeat(4,1fr)] lg:px-8">
           <div>
-            <p className="text-lg font-semibold text-white">RunBook</p>
+            <Link href="/" className="brand-logo-link" aria-label="RunBook home">
+              <Image
+                src="/brand/runbook-logo.png"
+                alt="RunBook"
+                width={200}
+                height={38}
+                className="brand-logo brand-logo-footer"
+              />
+            </Link>
             <p className="mt-3 max-w-sm text-sm leading-6 text-[#9CA8BA]">
               Manufacturing workflow control for routing, work orders, workstation execution, inspection, time, and mobile evidence.
             </p>

@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 const benefits = [
@@ -120,9 +121,15 @@ export default function RequestDemoPage() {
 
       <header className="relative z-10 border-b border-[#263244]/70 bg-[#05070C]/86 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[90rem] items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3" aria-label="RunBook home">
-            <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#3F8CFF]/45 bg-[#111A2A] text-sm font-black text-[#62D6FF] shadow-[0_0_34px_rgba(63,140,255,0.28)]">RB</span>
-            <span className="text-lg font-semibold text-white">RunBook</span>
+          <Link href="/" className="brand-logo-link" aria-label="RunBook home">
+            <Image
+              src="/brand/runbook-logo.png"
+              alt="RunBook"
+              width={230}
+              height={42}
+              className="brand-logo"
+              priority
+            />
           </Link>
           <nav className="hidden items-center gap-7 text-sm font-medium text-[#9CA8BA] lg:flex">
             <Link href="/#product" className="transition hover:text-white">Product</Link>
@@ -251,7 +258,15 @@ export default function RequestDemoPage() {
       <footer className="footer-shell relative z-10 border-t border-[#263244] bg-[#05070C]">
         <div className="mx-auto grid max-w-[90rem] gap-8 px-5 py-10 sm:px-6 md:grid-cols-[1.35fr_repeat(4,1fr)] lg:px-8">
           <div>
-            <p className="text-lg font-semibold text-white">RunBook</p>
+            <Link href="/" className="brand-logo-link" aria-label="RunBook home">
+              <Image
+                src="/brand/runbook-logo.png"
+                alt="RunBook"
+                width={200}
+                height={38}
+                className="brand-logo brand-logo-footer"
+              />
+            </Link>
             <p className="mt-3 max-w-sm text-sm leading-6 text-[#9CA8BA]">
               Manufacturing workflow control for routing, work orders, workstation execution, inspection, time, and mobile evidence.
             </p>

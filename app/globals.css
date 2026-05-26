@@ -45,6 +45,26 @@ a {
   color: #ffffff;
 }
 
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  max-width: 14.375rem;
+}
+
+.brand-logo {
+  display: block;
+  height: clamp(2.125rem, 4vw, 2.625rem);
+  width: auto;
+  max-width: min(14.375rem, 58vw);
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(63, 140, 255, 0.18));
+}
+
+.brand-logo-footer {
+  height: 2.25rem;
+  max-width: 12.5rem;
+}
+
 .site-grid {
   background-image:
     linear-gradient(rgba(156, 168, 186, 0.055) 1px, transparent 1px),
