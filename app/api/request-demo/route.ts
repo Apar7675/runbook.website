@@ -68,17 +68,22 @@ export async function POST(request: Request) {
     );
   }
 
+  const requestId = crypto.randomUUID();
+
   const resendApiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.RUNBOOK_LEADS_TO_EMAIL;
   const fromEmail = process.env.RUNBOOK_LEADS_FROM_EMAIL;
 
   if (!resendApiKey) {
-    console.info("RunBook demo request captured locally:", lead);
+    console.info("RunBook demo request accepted in local development.", {
+      requestId,
+    });
 
     return Response.json({
       ok: true,
       devMode: true,
-      message: "Demo request captured locally for development.",
+      requestId,
+      message: "Demo request accepted locally; details were not stored or sent.",
     });
   }
 
@@ -86,6 +91,7 @@ export async function POST(request: Request) {
     return Response.json(
       {
         ok: false,
+        requestId,
         error: "Email is not configured for this environment.",
       },
       { status: 500 },
@@ -107,22 +113,26 @@ export async function POST(request: Request) {
   });
 
   if (!resendResponse.ok) {
-    console.error(
-      "Resend failed to send RunBook demo request:",
-      await resendResponse.text(),
-    );
+    console.error("RunBook demo request delivery failed.", {
+      requestId,
+      providerStatus: resendResponse.status,
+    });
 
     return Response.json(
       {
         ok: false,
+        requestId,
         error: "Unable to send demo request right now.",
       },
       { status: 502 },
     );
   }
 
+  console.info("RunBook demo request accepted for delivery.", { requestId });
+
   return Response.json({
     ok: true,
+    requestId,
     message: "Thanks — your demo request was received. We’ll reach out soon.",
   });
 }

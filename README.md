@@ -16,7 +16,7 @@ Open `http://localhost:3005` in your browser.
 
 - POSTs to `/api/request-demo`
 - If `RESEND_API_KEY` is blank, the app runs in dev mode
-- Dev mode logs the submitted lead server-side and returns a local capture message
+- Dev mode records only a non-PII request correlation event; it does not retain or send lead details
 - When Resend is configured, the API sends the lead email using:
   - `RESEND_API_KEY`
   - `RUNBOOK_LEADS_TO_EMAIL`
@@ -27,14 +27,28 @@ Local development values live in `.env.local`. Keep `RESEND_API_KEY` blank unles
 ## Production Email Setup
 
 - Verify the sending domain in Resend before launch
-- Set these environment variables in Vercel:
+- Set these environment variables in the deployment platform:
   - `RESEND_API_KEY`
   - `RUNBOOK_LEADS_TO_EMAIL`
   - `RUNBOOK_LEADS_FROM_EMAIL`
 
-Recommended production values:
+Synthetic configuration example (replace through the deployment environment):
 
 ```bash
-RUNBOOK_LEADS_TO_EMAIL=ap@tenmfg.com
-RUNBOOK_LEADS_FROM_EMAIL=RunBook <demo@your-runbook-domain.com>
+RUNBOOK_LEADS_TO_EMAIL=leads@example.invalid
+RUNBOOK_LEADS_FROM_EMAIL=RunBook <demo@example.invalid>
 ```
+
+Do not commit real mail credentials or recipient identifiers.
+
+## Production Artifact Boundary
+
+Run `npm run build` and then `npm run verify:deployment`.
+
+The reviewed deployment inputs are:
+
+- `.next/standalone`
+- `.next/static`
+- `public`
+
+Do not deploy the complete `.next` directory. Development output, caches, logs, local environment files, and repository metadata are not release artifacts.
